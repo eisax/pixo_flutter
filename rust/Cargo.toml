@@ -1,0 +1,102 @@
+[package]
+name = "pixo"
+version = "0.4.1"
+edition = "2021"
+description = "A minimal-dependency, high-performance image compression library"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/leerob/pixo"
+homepage = "https://pixo.leerob.com"
+documentation = "https://docs.rs/pixo"
+keywords = ["image", "compression", "png", "jpeg", "encoding"]
+categories = ["compression", "encoding", "multimedia::images"]
+exclude = [
+    "tests/",
+    ".cursor/",
+    ".github/",
+    "web/",
+    "Cargo.toml.orig",
+]
+
+[lib]
+name = "pixo"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "pixo"
+path = "src/bin/pixo.rs"
+required-features = ["cli"]
+
+[[bin]]
+name = "pixo-web"
+path = "src/bin/web.rs"
+required-features = ["wasm"]
+
+[features]
+# Enable SIMD and parallel fast paths by default. SIMD is guarded by runtime
+# detection and falls back to scalar. Parallel uses rayon for row-level PNG
+# filtering; disable `parallel` in constrained environments.
+default = ["simd", "parallel"]
+simd = []
+parallel = ["rayon"]
+cli = ["clap"]
+wasm = ["wasm-bindgen", "talc"]
+ffi = []
+
+[dependencies]
+rayon = { version = "1.10", optional = true }
+clap = { version = "4.5", features = ["derive"], optional = true }
+wasm-bindgen = { version = "0.2", optional = true }
+talc = { version = "4", optional = true, default-features = false, features = ["lock_api"] }
+
+[dev-dependencies]
+criterion = { version = "0.5", features = ["html_reports"] }
+image = "=0.25.5"
+png = "0.17"
+rand = "0.8"
+reqwest = { version = "=0.11.14", default-features = false, features = ["blocking", "rustls-tls"] }
+sha2 = "0.10"
+proptest = "1.5"
+flate2 = "1.0"
+url = { version = "=2.4.1", default-features = true }
+imagequant = "=4.3.3"
+jpeg-encoder = { version = "0.6", features = ["simd"] }
+lodepng = "3"
+libdeflater = "1"
+zopfli = "0.8"
+
+
+[[bench]]
+name = "components"
+harness = false
+
+[[bench]]
+name = "comparison"
+harness = false
+
+[profile.release]
+lto = true              # Link-time optimization (merges all code, removes unused)
+opt-level = "z"         # Optimize for size
+codegen-units = 1       # Single codegen unit for better optimization
+panic = "abort"         # Remove unwinding code
+strip = true            # Strip symbols from binary
+
+[profile.bench]
+# Benchmarks need panic = "unwind" for Criterion to work properly
+# (it uses panic catching for outlier detection and internal error handling)
+panic = "unwind"
+lto = false             # Faster compilation for benchmarks
+opt-level = 3           # Optimize for speed, not size
+
+[lints.rust]
+missing_docs = "allow"
+unknown_lints = "allow"
+
+[lints.clippy]
+needless_range_loop = "allow"
+manual_is_multiple_of = "allow"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
