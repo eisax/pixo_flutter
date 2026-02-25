@@ -122,4 +122,4 @@ Currently the Flutter web backend is a stub and will throw `UnsupportedError`.
 Future work can integrate the existing pixo WASM build via JS interop.
 
 
-Built with love by kudah ndhlovu
+Built with love by kudah ndhlovu for the Zimbabwe fintech ecosystem

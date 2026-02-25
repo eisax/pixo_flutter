@@ -13,9 +13,6 @@ rust/target/
 *.freezed.dart
 *.mocks.dart
 
-# Temporary files
-test/test.png
-
 # Ignore IDE settings
 .idea/
 .vscode/

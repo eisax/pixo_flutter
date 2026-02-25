@@ -1,8 +1,8 @@
 name: pixo_flutter
 description: Flutter/Dart bindings for the pixo Rust image compression library.
-version: 1.0.0
-repository: https://github.com/leerob/pixo
-homepage: https://pixo.leerob.com
+version: 1.0.1
+repository: https://github.com/eisax/pixo_flutter
+homepage: https://pub.dev/packages/pixo_flutter
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
