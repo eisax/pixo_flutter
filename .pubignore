@@ -1,0 +1,34 @@
+# Ignore build artifacts and other non-essential files when publishing
+
+# Dart/Flutter build outputs
+dist/
+build/
+flutter_build/
+
+# Rust build outputs
+rust/target/
+
+# Generated files
+*.g.dart
+*.freezed.dart
+*.mocks.dart
+
+# Temporary files
+test/test.png
+
+# Ignore IDE settings
+.idea/
+.vscode/
+
+# Other large assets not needed on pub
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+
+# ensure unit test assets not packaged if not required
+build/unit_test_assets/
+
+# Node/npm
+node_modules/
