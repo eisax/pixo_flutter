@@ -120,3 +120,6 @@ An example app is available under `example/`.
 
 Currently the Flutter web backend is a stub and will throw `UnsupportedError`.
 Future work can integrate the existing pixo WASM build via JS interop.
+
+
+Built with love by kudah ndhlovu

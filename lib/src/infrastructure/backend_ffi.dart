@@ -1,5 +1,4 @@
 import 'dart:ffi' as ffi;
-import 'dart:io' show Platform;
 import 'dart:typed_data';
 import 'dart:io';
 

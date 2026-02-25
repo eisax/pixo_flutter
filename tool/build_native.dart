@@ -7,7 +7,7 @@ import 'dart:io';
 ///   dart run tool/build_native.dart
 Future<void> main() async {
   final repoRoot = Directory.current.path; // pixo_flutter/
-  final rustRoot = Directory('${repoRoot}/rust').path;
+  final rustRoot = Directory('$repoRoot/rust').path;
   final cargo = Platform.isWindows ? 'cargo.exe' : 'cargo';
 
   stdout.writeln('Building pixo native library with ffi feature...');
